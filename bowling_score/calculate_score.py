@@ -17,5 +17,7 @@ class CalculateScore:
                 Frame(k, self.scores[str(k)])
             )
 
+
     def calculate_points(self):
-        x = 1
+        pass
+

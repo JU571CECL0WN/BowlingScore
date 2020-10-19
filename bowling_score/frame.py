@@ -4,6 +4,7 @@ class Frame:
         self.position = position
         self.points = 0
         self.add = 0
+        self.calculate_points()
 
     def calculate_points(self):
         for t in self.throws:
