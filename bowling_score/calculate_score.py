@@ -1,5 +1,6 @@
 from bowling_score.frame import Frame
 
+
 class CalculateScore:
     def __init__(self, scores):
         self.scores = scores
@@ -15,6 +16,6 @@ class CalculateScore:
             self.frames.append(
                 Frame(k, self.scores[str(k)])
             )
-    def calculate_points(self):
-        
 
+    def calculate_points(self):
+        x = 1
