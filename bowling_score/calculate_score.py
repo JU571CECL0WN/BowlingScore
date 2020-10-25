@@ -17,8 +17,8 @@ class CalculateScore:
                 Frame(k, self.scores[str(k)])
             )
 
-
     def calculate_points(self):
+        temp = []
         for f in self.frames:
             while f.add != 0:
                 for add in range(f.position + 1, len(self.frames) + 1):
@@ -26,7 +26,12 @@ class CalculateScore:
                         f.points += 10
                     elif add == "/":
                         f.points += 20 - f.points
+                    elif add == "-":
+                        pass
                     else:
                         f.points += int(add)
-            # algo falta, falta el cambio en frames
-            
+                    f.add -= 1
+            temp.append(f)
+        self.frames = temp
+
+
