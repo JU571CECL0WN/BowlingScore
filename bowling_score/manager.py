@@ -12,4 +12,4 @@ class Manager:
         self.calculate_score = CalculateScore(scores)
         self.calculate_score.generate_frames()
         self.calculate_score.calculate_points()
-        print(self.calculate_score.frames)
+        print(self.calculate_score.total)

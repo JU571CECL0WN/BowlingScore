@@ -4,6 +4,7 @@ from bowling_score.frame import Frame
 class CalculateScore:
     def __init__(self, scores):
         self.scores = scores
+        self.total = 0
         self.frames = []
 
     def generate_frames(self):
@@ -18,20 +19,20 @@ class CalculateScore:
             )
 
     def calculate_points(self):
-        temp = []
         for f in self.frames:
-            while f.add != 0:
-                for add in range(f.position + 1, len(self.frames) + 1):
-                    if add == "X":
+            if f.add > 0:
+                if f.position == 10:
+                    break
+                next_throws = self.get_next_throws(f.add, f.position)
+                for throw in next_throws:
+                    if throw == "X":
                         f.points += 10
-                    elif add == "/":
+                    elif throw == "/":
                         f.points += 20 - f.points
-                    elif add == "-":
-                        pass
-                    else:
-                        f.points += int(add)
-                    f.add -= 1
-            temp.append(f)
-        self.frames = temp
+                    elif throw.isdigit():
+                        f.points += int(throw)
 
+            self.total += f.points
 
+    def get_next_throws(self, number, position):
+        pass

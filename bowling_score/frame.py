@@ -14,7 +14,5 @@ class Frame:
             elif t == "/":
                 self.points = 10
                 self.add = 1
-            elif t == "-":
-                pass
-            else:
+            elif t.isdigit():
                 self.points += int(t)
