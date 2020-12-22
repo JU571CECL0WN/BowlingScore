@@ -19,20 +19,21 @@ class CalculateScore:
             )
 
     def calculate_points(self):
-        for f in self.frames:
-            if f.add > 0:
-                if f.position == 10:
-                    break
-                next_throws = self.get_next_throws(f.add, f.position)
-                for throw in next_throws:
-                    if throw == "X":
-                        f.points += 10
-                    elif throw == "/":
-                        f.points += 20 - f.points
-                    elif throw.isdigit():
-                        f.points += int(throw)
+        for frame in self.frames:
+            for throw in frame.throws:
+                next_throws = self.get_next_throws(throw.add, frame.position, throw.position)
+                points = throw.points + sum(next_throws)
+                self.total += points
 
-            self.total += f.points
-
-    def get_next_throws(self, number, position):
-        pass
+    def get_next_throws(self, number, position_frame, position_throw):  # caso del decimo frame
+        next_throws = []
+        if number > 0:
+            for frame in range(position_frame, len(self.frames)):
+                for throw in self.frames[frame].throws:
+                    next_throws.append(throw.points)
+                    if len(next_throws) == number:
+                        return next_throws
+            if position_frame == 10:
+                for throw in range(position_throw + 1, len(self.frames[position_throw].throws) + 1):
+                    next_throws.append(self.frames[position_frame - 1].throws[throw - 1].points)
+        return next_throws

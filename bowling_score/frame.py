@@ -1,18 +1,27 @@
+from bowling_score.throw import Throw
+
+
 class Frame:
     def __init__(self, position, throws):
         self.throws = throws
         self.position = position
-        self.points = 0
-        self.add = 0
         self.calculate_points()
 
     def calculate_points(self):
-        for t in self.throws:
-            if t == "X":
-                self.points = 10
-                self.add = 2
-            elif t == "/":
-                self.points = 10
-                self.add = 1
-            elif t.isdigit():
-                self.points += int(t)
+        final_throws = []
+        keys = [letter for letter in range(0, len(self.throws))]
+        for t in keys:
+            if self.throws[t] == "X":
+                points = 10
+                add = 2
+                if self.position == 10:
+                    add = len(self.throws) - t - 1
+            elif self.throws[t] == "/":
+                points = 10 - int(self.throws[t - 1])
+                add = 1
+            else:
+                points = int(self.throws[t])
+                add = 0
+
+            final_throws.append(Throw(t, points, add))
+        self.throws = final_throws
